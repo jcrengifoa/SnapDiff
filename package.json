@@ -1,0 +1,142 @@
+{
+  "name": "snapdiff",
+  "displayName": "SnapDiff",
+  "description": "Visually compare uncommitted image changes against HEAD — swipe, opacity, onion skin, and redline diff.",
+  "version": "0.2.2",
+  "publisher": "jcrengifoa",
+  "icon": "media/icon.png",
+  "license": "MIT",
+  "keywords": [
+    "image",
+    "diff",
+    "compare",
+    "git",
+    "onion skin",
+    "redline",
+    "swipe",
+    "visual diff",
+    "image comparison"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jcrengifoa/SnapDiff.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jcrengifoa/SnapDiff/issues"
+  },
+  "homepage": "https://github.com/jcrengifoa/SnapDiff#readme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Visualization",
+    "SCM Providers",
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onCustomEditor:snapDiff.compare"
+  ],
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "snapDiff.compare",
+        "displayName": "SnapDiff",
+        "priority": "option",
+        "selector": [
+          { "filenamePattern": "*.png" },
+          { "filenamePattern": "*.jpg" },
+          { "filenamePattern": "*.jpeg" },
+          { "filenamePattern": "*.gif" },
+          { "filenamePattern": "*.webp" },
+          { "filenamePattern": "*.bmp" },
+          { "filenamePattern": "*.ico" },
+          { "filenamePattern": "*.svg" }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "snapDiff.compareActive",
+        "title": "Compare Image with SnapDiff",
+        "category": "SnapDiff",
+        "icon": {
+          "light": "media/icon-light.svg",
+          "dark": "media/icon-dark.svg"
+        }
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "snapDiff.compareActive",
+          "group": "navigation@-1",
+          "when": "resourceExtname =~ /\\.(png|jpg|jpeg|gif|webp|bmp|ico|svg)$/i && activeCustomEditorId != snapDiff.compare"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "snapDiff.compareActive",
+          "group": "navigation@99",
+          "when": "resourceExtname =~ /\\.(png|jpg|jpeg|gif|webp|bmp|ico|svg)$/i"
+        }
+      ],
+      "scm/resourceState/context": [
+        {
+          "command": "snapDiff.compareActive",
+          "group": "navigation",
+          "when": "scmProvider == git && resourceExtname =~ /\\.(png|jpg|jpeg|gif|webp|bmp|ico|svg)$/i"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "snapDiff.compareActive"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "SnapDiff",
+      "properties": {
+        "snapDiff.startupMode": {
+          "type": "string",
+          "enum": ["swipe", "opacity", "onion", "redline"],
+          "default": "swipe",
+          "description": "Comparison mode shown when the editor first opens."
+        },
+        "snapDiff.diffThreshold": {
+          "type": "number",
+          "default": 16,
+          "minimum": 0,
+          "maximum": 255,
+          "description": "Per-channel difference (0-255) a pixel must exceed to count as changed in Redline mode."
+        },
+        "snapDiff.highlightColor": {
+          "type": "string",
+          "default": "#ff2d55",
+          "description": "Color used to highlight changed pixels in Redline mode."
+        },
+        "snapDiff.onionSpeed": {
+          "type": "number",
+          "default": 1.2,
+          "minimum": 0.1,
+          "maximum": 10,
+          "description": "Default onion-skin animation speed (full cross-fade cycles per second)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.js --production",
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "esbuild": "^0.20.0",
+    "typescript": "^5.4.0"
+  }
+}

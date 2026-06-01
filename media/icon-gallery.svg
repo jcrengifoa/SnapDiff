@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2b3150"/>
+      <stop offset="1" stop-color="#141826"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff7a90"/>
+      <stop offset="1" stop-color="#ff2d55"/>
+    </linearGradient>
+  </defs>
+  <!-- background tile -->
+  <rect width="256" height="256" rx="40" fill="url(#bg)"/>
+  <!-- right half = "after", filled with accent -->
+  <path d="M128 54 A74 74 0 0 1 128 202 Z" fill="url(#accent)"/>
+  <!-- left half = "before", faint -->
+  <path d="M128 54 A74 74 0 0 0 128 202 Z" fill="#ffffff" fill-opacity="0.06"/>
+  <!-- lens ring -->
+  <circle cx="128" cy="128" r="74" fill="none" stroke="#eef1f7" stroke-width="7"/>
+  <!-- inner lens ring for depth -->
+  <circle cx="128" cy="128" r="48" fill="none" stroke="#eef1f7" stroke-width="3" stroke-opacity="0.45"/>
+  <!-- center seam = the diff -->
+  <line x1="128" y1="50" x2="128" y2="206" stroke="#eef1f7" stroke-width="6"/>
+</svg>
