@@ -293,7 +293,7 @@
   function renderSwipe() {
     const pos = state.position;
     imgAfter.style.opacity = "1";
-    imgAfter.style.clipPath = `inset(0 0 0 ${100 - pos}%)`;
+    imgAfter.style.clipPath = `inset(0 0 0 ${pos}%)`;
     $["swipe-handle"].style.left = pos + "%";
     $["label-before"].style.opacity = "1";
     $["label-after"].style.opacity = "1";
