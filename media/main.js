@@ -441,8 +441,8 @@
 
   $["swap"].addEventListener("click", () => {
     state.swapped = !state.swapped;
-    $["label-before"].textContent = state.swapped ? "Working tree" : "HEAD";
-    $["label-after"].textContent = state.swapped ? "HEAD" : "Working tree";
+    $["label-before"].textContent = state.swapped ? "Modified" : "Original";
+    $["label-after"].textContent = state.swapped ? "Original" : "Modified";
     loadImages();
   });
 

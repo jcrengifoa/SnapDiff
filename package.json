@@ -2,7 +2,7 @@
   "name": "snapdiff",
   "displayName": "SnapDiff",
   "description": "Visually compare uncommitted image changes against HEAD — swipe, opacity, onion skin, and redline diff.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "publisher": "jcrengifoa",
   "icon": "media/icon.png",
   "license": "MIT",

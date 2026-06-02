@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.3
+- Renamed image labels from "HEAD / Working tree" to "Original / Modified" for
+  clearer user-facing terminology.
+
 ## 0.2.2
 - The comparison editor is now **opt-in** (`priority: "option"`): VS Code keeps its
   normal image preview/diff, and SnapDiff opens via the title-bar button or the

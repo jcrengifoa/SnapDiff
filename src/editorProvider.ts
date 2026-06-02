@@ -209,15 +209,15 @@ export class SnapDiffEditorProvider
 
   <div id="viewport" class="viewport">
     <div id="stage" class="stage">
-      <img id="img-before" class="layer" alt="before (HEAD)" />
-      <img id="img-after" class="layer" alt="after (working tree)" />
+      <img id="img-before" class="layer" alt="before (Original)" />
+      <img id="img-after" class="layer" alt="after (Modified)" />
       <canvas id="diff-canvas" class="layer hidden"></canvas>
       <div id="swipe-handle" class="swipe-handle hidden">
         <div class="swipe-line"></div>
         <div class="swipe-grip">⇆</div>
       </div>
-      <div id="label-before" class="corner-label left">HEAD</div>
-      <div id="label-after" class="corner-label right">Working tree</div>
+      <div id="label-before" class="corner-label left">Original</div>
+      <div id="label-after" class="corner-label right">Modified</div>
     </div>
   </div>
 
