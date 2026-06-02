@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.5
+- Fixed swipe direction: handle now stays aligned with the visual divider
+  between Original and Modified.
+
 ## 0.2.4
 - Fixed image order in swipe mode — Original now appears on the left and
   Modified on the right.
