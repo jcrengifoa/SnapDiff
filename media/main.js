@@ -264,9 +264,11 @@
     $["redline-group"].classList.toggle("hidden", mode !== "redline");
     $["swipe-handle"].classList.toggle("hidden", mode !== "swipe");
 
-    // reset after-layer transforms
+    // reset after-layer transforms and label opacities
     imgAfter.style.opacity = "1";
     imgAfter.style.clipPath = "none";
+    $["label-before"].style.opacity = "1";
+    $["label-after"].style.opacity = "1";
 
     if (mode === "swipe") {
       $["slider-label"].textContent = "Position";
@@ -291,13 +293,18 @@
   function renderSwipe() {
     const pos = state.position;
     imgAfter.style.opacity = "1";
-    imgAfter.style.clipPath = `inset(0 ${100 - pos}% 0 0)`;
+    imgAfter.style.clipPath = `inset(0 0 0 ${100 - pos}%)`;
     $["swipe-handle"].style.left = pos + "%";
+    $["label-before"].style.opacity = "1";
+    $["label-after"].style.opacity = "1";
   }
 
   function renderOpacity() {
     imgAfter.style.clipPath = "none";
-    imgAfter.style.opacity = String(state.opacity / 100);
+    const o = state.opacity / 100;
+    imgAfter.style.opacity = String(o);
+    $["label-after"].style.opacity = String(o);
+    $["label-before"].style.opacity = "1";
   }
 
   // ---- onion skin: ping-pong cross-fade ----
@@ -313,9 +320,10 @@
       if (!onionPlaying) return;
       const cyclesPerSec = state.onionSpeed;
       const phase = ((now - onionStart) / 1000) * cyclesPerSec * Math.PI * 2;
-      // 0..1 triangle-ish via cosine for smooth fade
       const o = (1 - Math.cos(phase)) / 2;
       imgAfter.style.opacity = String(o);
+      $["label-after"].style.opacity = String(o);
+      $["label-before"].style.opacity = "1";
       state.onionRAF = requestAnimationFrame(tick);
     };
     state.onionRAF = requestAnimationFrame(tick);

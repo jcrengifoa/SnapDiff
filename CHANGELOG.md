@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.4
+- Fixed image order in swipe mode — Original now appears on the left and
+  Modified on the right.
+- Fixed label dimming: the "Modified" label now fades along with the image
+  in Opacity and Onion-skin modes.
+
 ## 0.2.3
 - Renamed image labels from "HEAD / Working tree" to "Original / Modified" for
   clearer user-facing terminology.
