@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.6
+- Fixed Git LFS-tracked images showing as broken in the comparison: HEAD bytes
+  are now read with `git cat-file --filters`, which resolves LFS pointers to
+  real image content (requires git >= 2.38).
+
 ## 0.2.5
 - Fixed swipe direction: handle now stays aligned with the visual divider
   between Original and Modified.

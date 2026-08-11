@@ -82,9 +82,16 @@ export async function resolveGitContext(fsPath: string): Promise<GitContext | nu
   return { repoRoot, relPath };
 }
 
-/** Read the bytes of a file at HEAD, or null if it does not exist there (new/untracked). */
+/**
+ * Read the bytes of a file at HEAD, or null if it does not exist there (new/untracked).
+ *
+ * Uses `cat-file --filters` rather than `show` so that smudge filters run: for a
+ * Git LFS file, `git show HEAD:<path>` returns only the ~128-byte pointer text,
+ * which is not a valid image. `--filters` applies the path's configured filters
+ * (resolving LFS pointers to real content) and is a no-op for non-filtered files.
+ */
 export async function readHeadBytes(ctx: GitContext): Promise<Uint8Array | null> {
-  const res = await runGit(["show", `HEAD:${ctx.relPath}`], ctx.repoRoot);
+  const res = await runGit(["cat-file", "--filters", `HEAD:${ctx.relPath}`], ctx.repoRoot);
   if (res.code !== 0) {
     return null;
   }
